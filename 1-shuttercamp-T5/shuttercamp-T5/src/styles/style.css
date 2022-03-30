@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+* {
+  box-sizing: border-box;
+  transition: all ease .2s;
+}
+
+body {
+  font-family: 'Arvo', serif;
+}
+
+/** INÍCIO NAVBAR **/
+.container {
+  border-bottom: 1px solid #ddd;
+}
+
+.header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 42px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logo img {
+  width: 80px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.add-picture {
+  background-color: #3da7e4;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px -2px rgba(0, 0, 0, .2);
+}
+
+.add-picture:hover {
+  filter: brightness(0.9);
+}
+/** FIM NAVBAR **/
+
+
+/** BOTÃO ADICIONAR **/
+.save-button {
+  width: 100%;
+  border: 0;
+  padding: 16px;
+  border-radius: 5px;
+  background-color: #3da7e4;
+  color: white;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  filter: brightness(0.9);
+}
+
+.save-button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/** FIM BOTÃO ADICIONAR **/
+
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+.page.explore .images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.page.explore .images .image {
+  width: 100%;
+  max-width: 380px;
+  height: 216px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, .2);
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.page.explore .images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page.explore .image .details {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, .8), rgba(0, 0, 0, .2) 40%);
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+}
+
+.page.explore .image .details .text {
+  margin-bottom: -10px;
+  text-shadow: 1px 1px 4px 3px rgba(0, 0, 0, 1);
+}
+
+.page.explore .image:hover .details {
+  opacity: 1;
+}
+
+.page.explore .image:hover .details .text {
+  margin-bottom: 0;
+}
+
+.page.explore .images .image:not(:nth-child(3n)) {
+  margin-right: 10px;
+}
+
+.page.image .top-section {
+  display: flex;
+  flex: 0;
+}
+
+.page.image .top-section .image {
+  width: 800px;
+  max-height: 600px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, .2);
+}
+
+.page.image .top-section .info {
+  padding: 0 20px;
+  width: 400px;
+}
+
+.page.image .top-section .info .title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.page.image {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-group .title {
+  margin-bottom: 5px;
+  font-size: 22px;
+}
+
+.input-group input {
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 1200px) {
+  .page.explore .images .image {
+    width: calc(50% - 5px);
+    max-width: 100%;
+  }
+
+  .page.explore .images .image:not(:nth-child(3n)) {
+    margin-right: 0px;
+  }
+
+  .page.explore .images .image:not(:nth-child(2n)) {
+    margin-right: 10px;
+  }
+
+  .page.image .top-section {
+    flex-direction: column;
+  }
+
+  .page.image .top-section .image {
+    width: 100%;
+  }
+
+  .page.image .top-section .info {
+    padding: 20px 0;
+    width: 100%;
+  } 
+}
+
+@media (max-width: 790px) {
+  .page.explore .images .image {
+    max-width: 100%;
+  }
+
+  .page.explore .images .image:not(:nth-child(2n)) {
+    margin-right: 0px;
+  }
+
+  .page.explore .images .image:nth-child(odd) {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .logo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo img {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+
+  .page.explore .images .image {
+    width: 100%;
+  }
+
+  .header {
+    justify-content: center;
+  }
+
+  .add-picture {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+  }
+
+  .page {
+    margin-bottom: 60px;
+  }
+
+  .page.explore .images .image:nth-child(odd) {
+    margin-right: 0px;
+  }
+}

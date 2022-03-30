@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+    
+  }
+  
+  body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'playball', 'lexend-deca';
+    background-color: #E5E5E5;
+   
+  }
+  
+  
