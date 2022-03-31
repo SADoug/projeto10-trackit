@@ -28,16 +28,15 @@ export default function TelaInicial() {
             navigate("/hoje");
         })
         promise.catch(err => {alert("Insira dados válidos")
-        setIsloading(true)})
+        setIsloading(true)});
     }
 
     return (<Container>
         <Logo />
-      
         <input typeof="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input typeof="text" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
         {isLoading ? 
-        <Button onClick={login}/>
+        <Button onClick={login}>Cadastrar</Button>
         :
         <Loading type="submit" >
          <ThreeDots color="white" height="10" />
@@ -88,6 +87,13 @@ height: 45px;
 background: #52B6FF;
 border-radius: 4.63636px;
 font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 20.976px;
+line-height: 26px;
+text-align: center;
+
+color: #FFFFFF;
 `
 const Loading = styled.div`
 display: flex;

@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import logo from "./../assets/logo-trackit.png"
 
 export default function Logo() {
   return (
     <Container>
-      <img src="https://financesonline.com/uploads/2019/12/Track-It-logo1.png" />
+      <img src={logo} />
       <div className="title">TrackIt</div>
     </Container>
   );
