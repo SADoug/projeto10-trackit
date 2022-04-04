@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 
 
+
 export default function TelaCadastro() {
     const [email, setEmail] = useState("");
     const [nome, setNome] = useState("");
@@ -13,6 +14,9 @@ export default function TelaCadastro() {
     const [foto, setFoto] = useState("");
     const [isLoading, setIsloading] = useState(true)
     const navigate = useNavigate();
+
+    
+    
 
 function cadastrar() {
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";

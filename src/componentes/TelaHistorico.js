@@ -5,10 +5,7 @@ import Menu from "./Menu";
 
 export default function TelaHistorico(salvarToken) {
     return (<Container>
-        <Topo>
-        <div className="title">TrackIt</div>
-        <div className="imagem">Imagem</div>
-        </Topo>
+        <Topo />
         <Header>
             <div className="h1">Histórico</div>
         </Header>
@@ -16,9 +13,6 @@ export default function TelaHistorico(salvarToken) {
         <div className="">Em breve você poderá ver o histórico dos seus hábitos aqui!</div>
         </Habitos> 
         <Menu>
-            <div>Hábitos</div>
-            <div>Hoje</div>
-            <div>Histórico</div>
         </Menu>
            </Container>
     )
@@ -28,7 +22,6 @@ const Container = styled.div`
   width: 100%;
   padding: 31px;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #e5e5e5;
@@ -38,7 +31,20 @@ const Header = styled.div`
  width: 100%;
 height: 29px;
 display: flex;
-justify-content: space-around;
+justify-content: flex-start;
+margin-top: 80px;
+margin-bottom: 10px;
+
+.h1 {
+width: 100px;
+height: 29px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 22.976px;
+line-height: 29px;
+color: #126BA5;
+}
 
 `
 const Habitos = styled.div`

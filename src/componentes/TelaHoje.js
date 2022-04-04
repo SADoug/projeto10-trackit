@@ -2,8 +2,35 @@
 import styled from "styled-components";
 import Topo from "./Topo"; 
 import Menu from "./Menu";
+import { useState, useEffect } from "react";
+import { useContext } from "react";
+import UserContext from "./Usecontext";
+import axios from "axios";
+import Habitoshoje from "./Habitoshoje";
 
-export default function TelaHoje(salvarToken) {
+
+export default function TelaHoje() {
+
+    const { token } = useContext(UserContext)
+    const config = {
+
+        headers: { "Authorization": `Bearer ${token}` }
+    }
+
+    const[render, setRender] = useState([]);
+    useEffect(() => {
+        const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
+        promise.then((result) => {
+            console.log(result.data)
+            setRender(result.data)
+        })
+        promise.catch((err) => {
+            alert("Problema");
+            console.log(err)
+        })
+    }, [])
+  
+
     return (<Container>
         <Topo>
         <div className="title">TrackIt</div>
@@ -14,7 +41,14 @@ export default function TelaHoje(salvarToken) {
             <div className="icone">icone</div>
         </Header>
         <Habitos>
-        <div className="">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</div>
+        <div>
+                    {render.map((elemento) => { 
+                        
+                        return (
+                     <Habitoshoje habitos={elemento} />
+                     
+                     ) })}
+                </div>
         </Habitos> 
         <Menu>
             <div>Hábitos</div>
@@ -24,6 +58,8 @@ export default function TelaHoje(salvarToken) {
            </Container>
     )
 }
+
+
 const Container = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -40,6 +76,7 @@ const Header = styled.div`
 height: 29px;
 display: flex;
 justify-content: space-around;
+margin-top: 80px;
 
 `
 const Habitos = styled.div`

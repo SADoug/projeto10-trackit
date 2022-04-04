@@ -5,14 +5,19 @@ import TelaCadastro from "./TelaCadastro";
 import TelaHabitos from "./TelaHabitos";
 import TelaHoje from "./TelaHoje";
 import TelaHistorico from "./TelaHistorico"
-//import { useState } from "react/cjs/react.production.min";
+import UserContext from "./Usecontext";
+import { useState } from "react";
+import Logo from "./Logo";
 
 
 
 function App() {
- //const [token, setToken] = useState(null);
+ const [token, setToken] = useState("");
+ const [foto, setFoto] = useState("");
+
   
   return (
+    <UserContext.Provider value={{token, setToken, setFoto, foto}}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TelaInicial />}/>
@@ -20,12 +25,13 @@ function App() {
         <Route path="/habitos" element={<TelaHabitos/>}/>
         <Route path="/hoje" element={<TelaHoje/>}/> 
         <Route path="/historico" element={<TelaHistorico/>}/>
-        
+        <Route path="/Logo" element={<Logo/>}/>
       </Routes>
     </BrowserRouter>
+   </UserContext.Provider>
   )
 }
 
 export default App;
 
-//salvarToken={(token) => setToken(token)} 
+//salvarToken={(token) => setToken(token)

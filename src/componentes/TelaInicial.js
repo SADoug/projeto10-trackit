@@ -4,12 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
+import {useContext} from "react";
+import UserContext from "./Usecontext";
 
 
 export default function TelaInicial() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [isLoading, setIsloading] = useState(true)
+
+    const { setFoto } = useContext(UserContext);
+    const { setToken } = useContext(UserContext);
+
 
     const navigate = useNavigate();
 
@@ -21,11 +27,11 @@ export default function TelaInicial() {
             password: senha
         });
         promise.then(response => {
-
             const { data } = response;
-            console.log(data);
-
+            console.log(data.token);
             navigate("/hoje");
+            setFoto(response.data.image);
+            setToken(response.data.token);
         })
         promise.catch(err => {alert("Insira dados válidos")
         setIsloading(true)});
@@ -36,7 +42,7 @@ export default function TelaInicial() {
         <input typeof="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input typeof="text" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
         {isLoading ? 
-        <Button onClick={login}>Cadastrar</Button>
+        <Button onClick={login}>Entrar</Button>
         :
         <Loading type="submit" >
          <ThreeDots color="white" height="10" />
@@ -65,7 +71,7 @@ border-radius: 5px;
 margin-bottom: 6px;
 font-family: 'Lexend Deca';
 font-style: normal;
-color: #DBDBDB;
+color: black;
 }
 `;
 

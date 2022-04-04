@@ -1,20 +1,21 @@
 import styled from "styled-components";
-import logo from "./../assets/logo-trackit.png"
+import {useContext} from "react";
+import UserContext from "./Usecontext";
 
 function Topo() {
+    const { foto } = useContext(UserContext)
     return (
         <Topo1>
             <div className="title">TrackIt</div>
-            <img src={logo} />
+            <img src={foto} />
         </Topo1>
     )
-
 }
 
 const Topo1 = styled.div`
 position: fixed;
 display: flex;
-justify-content: space-around;
+justify-content: space-between;
 width: 375px;
 height: 70px;
 left: 0px;
@@ -24,8 +25,7 @@ background: #126BA5;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
 .title {
-position: fixed;
-left: 0;
+
 width: 97px;
 height: 49px;
 font-family: 'Playball';
@@ -38,7 +38,9 @@ color: #FFFFFF;
 }
 
 img {
-    border-radius: 98.5px;
+    width: 70px;
+    border-radius: 50%;
+    right: 0;
 }`;
 
 export default Topo;
