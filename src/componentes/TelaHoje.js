@@ -7,29 +7,32 @@ import { useContext } from "react";
 import UserContext from "./Usecontext";
 import axios from "axios";
 import Habitoshoje from "./Habitoshoje";
+import dayjs from 'dayjs';
 
 
 export default function TelaHoje() {
-
+    const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     const { token } = useContext(UserContext)
     const config = {
-
-        headers: { "Authorization": `Bearer ${token}` }
+        headers: { "Authorization": `Bearer ${token}`}
     }
+    const [ reload, setReload ] = useState(); 
 
-    const[render, setRender] = useState([]);
+    
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
         promise.then((result) => {
             console.log(result.data)
             setRender(result.data)
+            setReload()
         })
         promise.catch((err) => {
             alert("Problema");
             console.log(err)
         })
-    }, [])
-  
+    }, [reload])
+    
+    const[render, setRender] = useState([]);
 
     return (<Container>
         <Topo>
@@ -37,8 +40,15 @@ export default function TelaHoje() {
         <div className="imagem">Imagem</div>
         </Topo>
         <Header>
-            <div className="h1">Meus Hábitos</div>
-            <div className="icone">icone</div>
+        <Div>
+                    {days.map((day, index) => {
+                        if (days.indexOf(day) == dayjs().day()) {
+                            return (
+                                <p key={index}> {day}, {dayjs().format('DD/MM')}</p>
+                            )
+                        }
+                    })}
+                </Div>
         </Header>
         <Habitos>
         <div>
@@ -46,7 +56,6 @@ export default function TelaHoje() {
                         
                         return (
                      <Habitoshoje habitos={elemento} />
-                     
                      ) })}
                 </div>
         </Habitos> 
@@ -60,12 +69,21 @@ export default function TelaHoje() {
 }
 
 
+const Div = styled.div`
+width: 100%;
+height: 29px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 22.976px;
+line-height: 29px;
+color: #126BA5;`;
+
 const Container = styled.div`
   min-height: 100vh;
   width: 100%;
   padding: 31px;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #e5e5e5;

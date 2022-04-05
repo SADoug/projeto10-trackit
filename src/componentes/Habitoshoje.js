@@ -4,10 +4,10 @@ import UserContext from "./Usecontext";
 import { useState, useContext } from "react"
 
 
-export default function Habitoshoje(habitos){
 
-    const { id, name, done, currentSequence, hightestSequence } = habitos;
-    console.log(habitos.habitos.name)
+export default function Habitoshoje(habitos){
+    const id = habitos.habitos.id
+    const done =  habitos.habitos.done
 
     
     const { token } = useContext(UserContext)
@@ -16,21 +16,21 @@ export default function Habitoshoje(habitos){
         headers: { "Authorization": `Bearer ${token}` }
     }
 
-    const HabitoFeitoURL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/${id}/ID_DO_HABITO/check`
-    const HabitoNãoFeitoURL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/${id}/ID_DO_HABITO/uncheck`
-    const [habitofeito, setHabitofeito] = useState(done)
+    const HabitoFeitoURL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/${id}/check`
+    const HabitoNãoFeitoURL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/${id}/uncheck`
+    const [habitofeito, setHabitofeito] = useState(true)
 
 function toggleChecaHabito(){
-    if(habitofeito){
-        axios.post(HabitoNãoFeitoURL, id, config)
+    if(done){
+        axios.post(HabitoNãoFeitoURL, config)
         .then(({data}) => {
-            setHabitofeito(!habitofeito);
+            setHabitofeito(false);
         })
         .catch(error => console.log("desmarcar" + error.response))
     } else {
-        axios.post(HabitoFeitoURL, id, config)
+        axios.post(HabitoFeitoURL, config)
         .then(({data}) => {
-            setHabitofeito(!habitofeito);
+            setHabitofeito(true);
         })
         .catch(error => console.log("marcar" + error.response));
     }
@@ -38,14 +38,16 @@ function toggleChecaHabito(){
 
 
     return (
-        <ContainerHabito>
+        <ContainerHabito3>
+            <Div>
                       <h1>{habitos.habitos.name}</h1>
-                      <h1>Sequência atual: {habitos.habitos.currentSequence}</h1>
-                      <h1>Seu recorde: {habitos.habitos.hightestSequence}</h1>
+                      <h2>Sequência atual: {habitos.habitos.currentSequence}</h2>
+                      <h2>Seu recorde: {habitos.habitos.hightestSequence}</h2>
+            </Div>
                       <Check id={habitos.habitos.id} onClick={() => toggleChecaHabito()} >
-                          <ion-icon name="checkbox"></ion-icon>
+                         <img done={habitofeito} src="https://e7.pngegg.com/pngimages/297/504/png-clipart-organization-irish-rugby-ireland-hotel-white-check-circle-angle-white.png" />
                       </Check> 
-                 </ContainerHabito>
+                 </ContainerHabito3>
     )
 }
 
@@ -60,23 +62,53 @@ background-color: red;
 border: 1px solid #E7E7E7;
 box-sizing: border-box;
 border-radius: 5px;
-
-ion-icon {
-    ${({done}) => {
-return done ? "color: #8FC549" : "color: #EBEBEB"  
-}
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 10px;
+img {
+    width: 35px;
+    
+    ${({done}) => done ? "background-color: #8f8f8f" : "background-color: #E7E7E7"  
 }}
-
 `;
 
-const ContainerHabito = styled.div`
+const Div = styled.div`
+h1 {
+width: 208px;
+height: 25px;
+margin-top: 10px;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 19.976px;
+line-height: 25px;
+color: #666666;
+}
+h2 {
+   
+width: 146px;
+height: 32px;
+left: 33px;
+top: 222px;
+
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 12.976px;
+line-height: 16px;
+
+color: #666666;
+}
+`;
+
+const ContainerHabito3 = styled.div`
 width: 340px;
-height: 180px;
+height: 94px;
 background: #FFFFFF;
 border-radius: 5px;
 margin-top: 15px;
 display: flex;
-flex-direction:column ;
 justify-content: space-around;
 
 input {

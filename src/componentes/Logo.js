@@ -20,12 +20,13 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
 
+
   img {
     position: relative;
     bottom: -3px;
     right: -5px;
-    width: 64px;
-    height: 64px;
+    width: 154px;
+    height: 100px;
   }
 
   .title {

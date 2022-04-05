@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import UserContext from "./Usecontext";
 import axios from "axios";
+import vector from "./../assets/Vector.png"
 
 
 
@@ -70,7 +71,7 @@ export default function TelaHabitos() {
         }
     }
 
-const[render, setRender] = useState([]);
+    const [render, setRender] = useState([]);
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
         promise.then((result) => {
@@ -87,85 +88,86 @@ const[render, setRender] = useState([]);
     function deleteHabit(id) {
         const confirm = window.confirm("Deseja excluir o hábito?");
         console.log("deletei");
-    
+
         if (confirm === true) {
-          const promise = axios.delete(
-            `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,
-            config
-          );
-    
-          promise.then((response) => {
-            console.log(response.data);
-            setTemhabito(true);
-          });
-          promise.catch((error) => {
-            console.log(error.response);
-          });
+            const promise = axios.delete(
+                `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,
+                config
+            );
+
+            promise.then((response) => {
+                console.log(response.data);
+                setTemhabito(true);
+            });
+            promise.catch((error) => {
+                console.log(error.response);
+            });
         }
-      }
+    }
 
 
     const [habitos, setHabitos] = useState();
     console.log(habitos)
-            return (<Container>
-                <Topo />
-                <Header>
-                    <div className="h1">Meus Hábitos</div>
-                    <div onClick={() => setHabitonovo(true)} className="icone">+</div>
-                </Header>
-                <Habitos>
-                    {habitonovo ?
-                        <ContainerHabito>
-                            <input typeof="text" placeholder="nome do habito"
-                                onChange={(e) => setInput(e.target.value)}
-                                required />
-                            <Dias className="dias">
-                                <Dia selecionado={clicou.domingo} onClick={() => toggle(0, "domingo")}>D</Dia>
-                                <Dia selecionado={clicou.segunda} onClick={() => toggle(1, "segunda")}>S</Dia>
-                                <Dia selecionado={clicou.terça} onClick={() => toggle(2, "terca")}>T</Dia>
-                                <Dia selecionado={clicou.quarta} onClick={() => toggle(3, "quarta")}>Q</Dia>
-                                <Dia selecionado={clicou.quinta} onClick={() => toggle(4, "quinta")}>Q</Dia>
-                                <Dia selecionado={clicou.sexta} onClick={() => toggle(5, "sexta")}>S</Dia>
-                                <Dia selecionado={clicou.sabado} onClick={() => toggle(6, "sabado")}>S</Dia>
-                            </Dias>
-                            <Botoes >
-                                <div onClick={() => setHabitonovo(false)} className="cancelar">Cancelar</div>
-                                <div onClick={() => enviarHabito()} className="salvar">Salvar</div>
-                            </Botoes>
-                        </ContainerHabito>
-                        :
-                        <div className="nenhum">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</div>
-                    }
-                </Habitos>
-                <div>
-                    {render.map((elemento) => { 
-                        const { id, name, days} = elemento;
-                        return (
-                     <ContainerHabito>
-                      <h1>{name}</h1>
-                     <Dias className="dias">
-                         <Diah id={0} days={days}>D</Diah>
-                         <Diah id={1} days={days}>S</Diah>
-                         <Diah id={2} days={days}>T</Diah>
-                         <Diah id={3} days={days}>Q</Diah>
-                         <Diah id={4} days={days}>Q</Diah>
-                         <Diah id={5} days={days}>S</Diah>
-                         <Diah id={6} days={days}>S</Diah>
-                     </Dias>
-                     <Botoes >
-                        <img
-                    className="trash"
-                    src="https://media.istockphoto.com/vectors/trash-vector-icon-on-transparent-background-trash-icon-vector-id1013545186"
-                    onClick={() => deleteHabit(elemento.id)}
-                  />
-                     </Botoes>
-                 </ContainerHabito>
-                     ) })}
-                </div>
-                <Menu />
-            </Container>
-            )
-        }
+    return (<Container>
+        <Topo />
+        <Header>
+            <div className="h1">Meus Hábitos</div>
+            <div onClick={() => setHabitonovo(true)} className="icone">+</div>
+        </Header>
+        <Habitos>
+            {habitonovo ?
+                <ContainerHabito2>
+                    <input typeof="text" placeholder="nome do habito"
+                        onChange={(e) => setInput(e.target.value)}
+                        required />
+                    <Dias className="dias">
+                        <Dia selecionado={clicou.domingo} onClick={() => toggle(0, "domingo")}>D</Dia>
+                        <Dia selecionado={clicou.segunda} onClick={() => toggle(1, "segunda")}>S</Dia>
+                        <Dia selecionado={clicou.terça} onClick={() => toggle(2, "terca")}>T</Dia>
+                        <Dia selecionado={clicou.quarta} onClick={() => toggle(3, "quarta")}>Q</Dia>
+                        <Dia selecionado={clicou.quinta} onClick={() => toggle(4, "quinta")}>Q</Dia>
+                        <Dia selecionado={clicou.sexta} onClick={() => toggle(5, "sexta")}>S</Dia>
+                        <Dia selecionado={clicou.sabado} onClick={() => toggle(6, "sabado")}>S</Dia>
+                    </Dias>
+                    <Botoes >
+                        <div onClick={() => setHabitonovo(false)} className="cancelar">Cancelar</div>
+                        <div onClick={() => enviarHabito()} className="salvar">Salvar</div>
+                    </Botoes>
+                </ContainerHabito2>
+                :
+                <div className="nenhum">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</div>}
+
+        </Habitos>
+        <div>
+            {render.map((elemento) => {
+                const { id, name, days } = elemento;
+                return (
+                    <ContainerHabito>
+                        <h1>{name}</h1>
+                        <Dias className="dias">
+                            <Diah id={0} days={days}>D</Diah>
+                            <Diah id={1} days={days}>S</Diah>
+                            <Diah id={2} days={days}>T</Diah>
+                            <Diah id={3} days={days}>Q</Diah>
+                            <Diah id={4} days={days}>Q</Diah>
+                            <Diah id={5} days={days}>S</Diah>
+                            <Diah id={6} days={days}>S</Diah>
+                        </Dias>
+                        <Botoes >
+                            <img
+                                className="trash"
+                                src={vector}
+                                onClick={() => deleteHabit(elemento.id)}
+                            />
+                        </Botoes>
+                    </ContainerHabito>
+                )
+            })}
+        </div>
+        <Menu />
+    </Container>
+    )
+}
 const Diah = styled.div`
 width: 30px;
 height: 30px;
@@ -176,9 +178,11 @@ border-radius: 5px;
 margin-bottom: 10px;
 display: flex;
 justify-content: center;
+align-items: center;
+font-family:'Lexend Deca'; 
 color: ${props => props.selecionado ? "#FFFFFF" : "#DBDBDB"};
 background-color: ${props => props.selecionado ? "#CFCFCF" : "#FFFFFF"};
-${({id, days}) => days.includes(id) ? "background-color: #33ff00" : "background-color: red"}
+${({ id, days }) => days.includes(id) ? "background-color: #CFCFCF" : "background-color: #FFFFFF"}
 `;
 
 
@@ -204,6 +208,47 @@ const Container = styled.div`
 
 const ContainerHabito = styled.div`
 width: 340px;
+height: 91px;
+background: #FFFFFF;
+border-radius: 5px;
+margin-top: 15px;
+display: flex;
+flex-direction:column ;
+
+
+input {
+width: 303px;
+height: 45px;
+margin-left: 10px;
+margin-top: 10px;
+margin-bottom: 10px;
+background: #FFFFFF;
+border: 1px solid #D5D5D5;
+box-sizing: border-box;
+border-radius: 5px;
+}
+
+h1 {
+width: 208px;
+height: 25px;
+margin-left: 15px;
+margin-top: 13px;
+margin-bottom:10px ;
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 19.976px;
+line-height: 25px;
+/* identical to box height */
+
+
+color: #666666;
+}
+
+
+`;
+const ContainerHabito2 = styled.div`
+width: 340px;
 height: 180px;
 background: #FFFFFF;
 border-radius: 5px;
@@ -221,11 +266,26 @@ margin-bottom: 10px;
 background: #FFFFFF;
 border: 1px solid #D5D5D5;
 box-sizing: border-box;
-border-radius: 5px;
+border-radius: 5px;}
 
+h1 {
+width: 208px;
+height: 25px;
+
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 19.976px;
+line-height: 25px;
+/* identical to box height */
+
+
+color: #666666;
 }
 
+
 `;
+
 
 const Dias = styled.div`
 
@@ -250,15 +310,16 @@ background-color: ${props => props.selecionado ? "#CFCFCF" : "#FFFFFF"};
 `;
 
 const Botoes = styled.div`
- display: flex;
-    justify-content: flex-end;
-img {
- width: 13px;
- height: 15px;
+ position: absolute;
+img { 
+
+margin-left: 320px;
+width: 30px;
+height: 15px;
 }
  .cancelar {
 width: 69px;
-height: 20px;
+height: 40px;
 font-family: 'Lexend Deca';
 font-style: normal;
 font-weight: 400;

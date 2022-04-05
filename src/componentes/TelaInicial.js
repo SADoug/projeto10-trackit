@@ -9,8 +9,8 @@ import UserContext from "./Usecontext";
 
 
 export default function TelaInicial() {
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    const [email, setEmail] = useState("testando1234@gmail.com");
+    const [senha, setSenha] = useState("teste123");
     const [isLoading, setIsloading] = useState(true)
 
     const { setFoto } = useContext(UserContext);
@@ -28,7 +28,7 @@ export default function TelaInicial() {
         });
         promise.then(response => {
             const { data } = response;
-            console.log(data.token);
+            console.log(data);
             navigate("/hoje");
             setFoto(response.data.image);
             setToken(response.data.token);
