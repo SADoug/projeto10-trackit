@@ -133,9 +133,9 @@ export default function TelaHabitos() {
                         <div onClick={() => setHabitonovo(false)} className="cancelar">Cancelar</div>
                         <div onClick={() => enviarHabito()} className="salvar">Salvar</div>
                     </Botoes>
-                </ContainerHabito2>
+                </ContainerHabito2> 
                 :
-                <div className="nenhum">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</div>}
+                  <div className="nenhum">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</div>}
 
         </Habitos>
         <div>
@@ -196,7 +196,7 @@ const Render = styled.div`
 
 const Container = styled.div`
   min-height: 100vh;
-  width: 100%;
+  width: 375px;
   padding: 31px;
   display: flex;
   align-items: center;
@@ -313,8 +313,9 @@ const Botoes = styled.div`
  position: absolute;
 img { 
 
-margin-left: 320px;
-width: 30px;
+margin-left: 310px;
+margin-top: 10px;
+width: 13px;
 height: 15px;
 }
  .cancelar {

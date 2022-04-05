@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import UserContext from "./Usecontext";
 import { useState, useContext } from "react"
+import Vectorcheck from "./../assets/Vectorcheck.png"
 
 
 
@@ -35,7 +36,13 @@ function toggleChecaHabito(){
         .catch(error => console.log("marcar" + error.response));
     }
 }
-
+function testecor(){
+    if(habitofeito){
+     setHabitofeito(false);
+    } else{
+        setHabitofeito(true);
+    }
+}
 
     return (
         <ContainerHabito3>
@@ -44,8 +51,8 @@ function toggleChecaHabito(){
                       <h2>Sequência atual: {habitos.habitos.currentSequence}</h2>
                       <h2>Seu recorde: {habitos.habitos.hightestSequence}</h2>
             </Div>
-                      <Check id={habitos.habitos.id} onClick={() => toggleChecaHabito()} >
-                         <img done={habitofeito} src="https://e7.pngegg.com/pngimages/297/504/png-clipart-organization-irish-rugby-ireland-hotel-white-check-circle-angle-white.png" />
+                      <Check id={habitos.habitos.id} done={habitofeito} onClick={() => testecor()} >
+                         <img  src={Vectorcheck} />
                       </Check> 
                  </ContainerHabito3>
     )
@@ -58,7 +65,7 @@ const Check = styled.div`
 width: 69px;
 height: 69px;
 
-background-color: red;
+
 border: 1px solid #E7E7E7;
 box-sizing: border-box;
 border-radius: 5px;
@@ -66,11 +73,13 @@ display: flex;
 justify-content: center;
 align-items: center;
 margin-top: 10px;
+${({done}) => done ? "background-color: #8f8f8f" : "background-color: #E7E7E7"  
+}
 img {
     width: 35px;
-    
-    ${({done}) => done ? "background-color: #8f8f8f" : "background-color: #E7E7E7"  
-}}
+    color: red;}
+    ${({done}) => done ? "background-color: #E7E7E7" : "background-color: #8fc549"  
+}
 `;
 
 const Div = styled.div`

@@ -16,13 +16,14 @@ export default function TelaHoje() {
     const config = {
         headers: { "Authorization": `Bearer ${token}`}
     }
+    console.log({token})
     const [ reload, setReload ] = useState(); 
 
     
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
         promise.then((result) => {
-            console.log(result.data)
+            console.log(config)
             setRender(result.data)
             setReload()
         })
@@ -81,10 +82,9 @@ color: #126BA5;`;
 
 const Container = styled.div`
   min-height: 100vh;
-  width: 100%;
+  width: 375px;
   padding: 31px;
   display: flex;
-  align-items: center;
   flex-direction: column;
   background-color: #e5e5e5;
   
