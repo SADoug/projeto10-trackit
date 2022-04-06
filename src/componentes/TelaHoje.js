@@ -52,7 +52,7 @@ export default function TelaHoje() {
                         )
                     }
                 })}
-                <h1>{valorporcentagem} % dos hábitos concluídos </h1>
+                {(valorporcentagem ===0) ? <h2>Nenhum hábito concluído</h2> : <h1>{valorporcentagem} % dos hábitos concluídos </h1>}
             </Div>
         </Header>
         <Habitos>
@@ -88,6 +88,15 @@ font-size: 17.976px;
 line-height: 22px;
 
 color: #8FC549;
+}
+h2 {
+    font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 17.976px;
+line-height: 22px;
+
+color: #BABABA;
 }
 
 `;
