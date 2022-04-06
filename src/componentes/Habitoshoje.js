@@ -1,60 +1,66 @@
 import styled from "styled-components";
 import axios from "axios";
 import UserContext from "./Usecontext";
-import { useState, useContext } from "react"
-import Vectorcheck from "./../assets/Vectorcheck.png"
+import React, { useState, useContext } from "react"
+import Vector from "./../assets/Vectorcheck.png"
 
 
 
-export default function Habitoshoje(habitos){
-    const id = habitos.habitos.id
-    const done =  habitos.habitos.done
+const URL_CHECK_HABIT = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/";
 
-    
-    const { token } = useContext(UserContext)
-    const config = {
-
-        headers: { "Authorization": `Bearer ${token}` }
+export default function Habitoshoje({
+    id,
+    name,
+    completed, 
+    highestSequence,
+    currentSequence,
+}) {
+    const {token} = React.useContext(UserContext);
+    const [ isComplete, setIsComplete] = React.useState(completed)
+    const [cor , setCor ] = useState(true)
+console.log(currentSequence)
+    function handleSelectHabit() {
+        setIsComplete(!isComplete);
+        if (!isComplete) {
+            setCheckHabit("check");
+            setCor(false)
+            console.log("to funcionando")
+        }else{
+            setCheckHabit("uncheck");
+            setCor(true)
+        }
     }
 
-    const HabitoFeitoURL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/${id}/check`
-    const HabitoNãoFeitoURL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/${id}/uncheck`
-    const [habitofeito, setHabitofeito] = useState(true)
-
-function toggleChecaHabito(){
-    if(done){
-        axios.post(HabitoNãoFeitoURL, config)
-        .then(({data}) => {
-            setHabitofeito(false);
+    function setCheckHabit(finalRoute) {
+        const promise = axios({
+            method: "post",
+            url: `${URL_CHECK_HABIT}${id}/${finalRoute}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        
+        promise.then((response)=>{
+            console.log(response)
         })
-        .catch(error => console.log("desmarcar" + error.response))
-    } else {
-        axios.post(HabitoFeitoURL, config)
-        .then(({data}) => {
-            setHabitofeito(true);
+
+        promise.catch((err)=>{
+            console.log(err)
         })
-        .catch(error => console.log("marcar" + error.response));
     }
-}
-function testecor(){
-    if(habitofeito){
-     setHabitofeito(false);
-    } else{
-        setHabitofeito(true);
-    }
-}
+
 
     return (
         <ContainerHabito3>
             <Div>
-                      <h1>{habitos.habitos.name}</h1>
-                      <h2>Sequência atual: {habitos.habitos.currentSequence}</h2>
-                      <h2>Seu recorde: {habitos.habitos.hightestSequence}</h2>
+                <h1>{name}</h1>
+                <h2>Sequência atual: {currentSequence}</h2>
+                <h2>Seu recorde: {highestSequence}</h2>
             </Div>
-                      <Check id={habitos.habitos.id} done={habitofeito} onClick={() => testecor()} >
-                         <img  src={Vectorcheck} />
-                      </Check> 
-                 </ContainerHabito3>
+            <Check id={id} done={cor} onClick={handleSelectHabit} >
+                <img  src={Vector} />
+            </Check>
+        </ContainerHabito3>
     )
 }
 
@@ -64,8 +70,6 @@ const Check = styled.div`
 
 width: 69px;
 height: 69px;
-
-
 border: 1px solid #E7E7E7;
 box-sizing: border-box;
 border-radius: 5px;
@@ -73,13 +77,12 @@ display: flex;
 justify-content: center;
 align-items: center;
 margin-top: 10px;
-${({done}) => done ? "background-color: #8f8f8f" : "background-color: #E7E7E7"  
-}
+${({ done }) => done ? "background-color: #E7E7E7" : "background-color: #8FC549"
+    }}
 img {
     width: 35px;
-    color: red;}
-    ${({done}) => done ? "background-color: #E7E7E7" : "background-color: #8fc549"  
-}
+    
+    
 `;
 
 const Div = styled.div`

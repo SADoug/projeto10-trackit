@@ -14,10 +14,12 @@ import Logo from "./Logo";
 function App() {
  const [token, setToken] = useState("");
  const [foto, setFoto] = useState("");
+ const [ porcentagem, setPorcentagem ] = useState("")
+ const [valorporcentagem, setValorPorcentagem] = useState("")
 
   
   return (
-    <UserContext.Provider value={{token, setToken, setFoto, foto}}>
+    <UserContext.Provider value={{token, setToken, setFoto, foto, porcentagem, setPorcentagem, valorporcentagem, setValorPorcentagem}}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<TelaInicial />}/>

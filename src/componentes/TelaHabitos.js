@@ -129,10 +129,10 @@ export default function TelaHabitos() {
                         <Dia selecionado={clicou.sexta} onClick={() => toggle(5, "sexta")}>S</Dia>
                         <Dia selecionado={clicou.sabado} onClick={() => toggle(6, "sabado")}>S</Dia>
                     </Dias>
-                    <Botoes >
+                    <Botoes1 >
                         <div onClick={() => setHabitonovo(false)} className="cancelar">Cancelar</div>
                         <div onClick={() => enviarHabito()} className="salvar">Salvar</div>
-                    </Botoes>
+                    </Botoes1>
                 </ContainerHabito2> 
                 :
                   <div className="nenhum">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</div>}
@@ -144,7 +144,7 @@ export default function TelaHabitos() {
                 return (
                     <ContainerHabito>
                         <h1>{name}</h1>
-                        <Dias className="dias">
+                        <Dias>
                             <Diah id={0} days={days}>D</Diah>
                             <Diah id={1} days={days}>S</Diah>
                             <Diah id={2} days={days}>T</Diah>
@@ -153,13 +153,13 @@ export default function TelaHabitos() {
                             <Diah id={5} days={days}>S</Diah>
                             <Diah id={6} days={days}>S</Diah>
                         </Dias>
-                        <Botoes >
+                        <Botoes1 >
                             <img
                                 className="trash"
                                 src={vector}
                                 onClick={() => deleteHabit(elemento.id)}
                             />
-                        </Botoes>
+                        </Botoes1>
                     </ContainerHabito>
                 )
             })}
@@ -176,6 +176,7 @@ border: 1px solid #D5D5D5;
 box-sizing: border-box;
 border-radius: 5px;
 margin-bottom: 10px;
+margin-right: 4px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -290,7 +291,7 @@ color: #666666;
 const Dias = styled.div`
 
     display: flex;
-    justify-content: space-around;
+    margin-right: 4px;
 
 `;
 
@@ -309,12 +310,12 @@ background-color: ${props => props.selecionado ? "#CFCFCF" : "#FFFFFF"};
 
 `;
 
-const Botoes = styled.div`
- position: absolute;
+const Botoes1 = styled.div`
+ display: flex;
 img { 
 
 margin-left: 310px;
-margin-top: 10px;
+margin-top: 20px;
 width: 13px;
 height: 15px;
 }

@@ -9,8 +9,8 @@ import UserContext from "./Usecontext";
 
 
 export default function TelaInicial() {
-    const [email, setEmail] = useState("testando1234@gmail.com");
-    const [senha, setSenha] = useState("teste123");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
     const [isLoading, setIsloading] = useState(true)
 
     const { setFoto } = useContext(UserContext);

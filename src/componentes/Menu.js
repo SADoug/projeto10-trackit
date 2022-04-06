@@ -2,9 +2,23 @@ import styled from "styled-components";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
+import {useContext} from "react";
+import UserContext from "./Usecontext";
 
 function Menu(){
-    const percentage = 60
+  const { porcentagem } = useContext(UserContext)
+  const { setValorPorcentagem } = useContext(UserContext);
+    console.log(porcentagem.length)
+    let contador = 0;
+
+    for (let i=0; i< porcentagem.length; i++){
+      if(porcentagem[i].done === true){
+       contador = contador + 1
+      }
+    }
+    let percentage = ((contador/porcentagem.length)*100)
+    setValorPorcentagem(percentage)
+    console.log(percentage)
     return(<Footer>
         <Link className="habitos" to="/habitos">Habitos</Link>
         <Link to="/hoje">
